@@ -177,7 +177,7 @@ def cpplint_on_files(files, commit, filters=DEFAULT_CPPLINT_FILTER_OPTIONS):
 
 def submit_review(change, user, host, data, port=22):
     """Uses the data as input to submit a new review."""
-    remote = local["ssh"]["{0}@{1}:{2}".format(user, host, port)]
+    remote = local["ssh"]["{0}@{1}".format(user, host), "-p {}".format(port)]
     (local["cat"] << data | remote["gerrit", "review", change, "--json"])()
 
 
